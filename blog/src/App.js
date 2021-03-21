@@ -5,7 +5,8 @@ function App() {
   return (
     <div className="App">
       <Login></Login> 
-      {<Home userId={1}></Home>}
+      {/* <Home userId={1}></Home> */}
+      <Home/>
       
     </div>
   );
