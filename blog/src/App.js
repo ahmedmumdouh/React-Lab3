@@ -4,9 +4,9 @@ import Login from "./components/Login";
 function App() {
   return (
     <div className="App">
-      <Login></Login> 
-      {/* <Home userId={1}></Home> */}
-      <Home/>
+      {/* <Login></Login>  */}
+      <Home userId={1}></Home>
+      
       
     </div>
   );
