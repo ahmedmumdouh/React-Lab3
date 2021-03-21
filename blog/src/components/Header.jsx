@@ -1,6 +1,5 @@
-import React from "react";
 
-export function Header({ username }) {
+export default function Header({ username }) {
   return (
     <div>
       <p>{username}</p>
