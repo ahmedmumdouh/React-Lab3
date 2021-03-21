@@ -1,17 +1,14 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 
 export function Login() {
     const [name, updateUsername] = useState()
-  return creatorService.loading ? (
-    <h1>Loading...</h1>
-  ) : (
+    const [status, updateStatus] = useState(false);
+  return (
         <form>
-            <input type="text" name="username" value=""  onChange={(e) => updateUsername("name", e.target.value) ></input>
-            <input type="password" name="password" value=""  ></input>
-            <button onClick= {} >Login</button>
-           
+            <input type="text" name="username" value=""  onChange={(e) => updateUsername("name", e.target.value)}/>
+            <input type="password" name="password" value="" />
+            <button onClick= {(e)=> updateStatus(true)} >Login</button>   
         </form>    
   );
 }
