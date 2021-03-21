@@ -4,7 +4,7 @@ export default function Login() {
   const [name, updateUsername] = useState("");
   const [status, updateStatus] = useState(false);
   return (
-    <form>
+    <form className="form-inline" >
       <input
         type="text"
         name="username"
