@@ -1,4 +1,5 @@
 import React from 'react'
+import {PostCard} from './PostCard'
 
 function Blog({users,posts}) {
     return (
@@ -9,7 +10,7 @@ function Blog({users,posts}) {
               post={post}
               
               user={
-                userState.users.filter(
+                users.filter(
                   (user) => parseInt(user.id) === parseInt(post.userId)
                 )[0]
               }
