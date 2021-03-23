@@ -1,18 +1,38 @@
-import { Router } from "@reach/router";
+import { navigate, Router } from "@reach/router";
 import "./App.css";
 import { Home } from "./components/Home";
 import Login from "./components/Login";
 import Post from "./components/Post";
 import UserProfile from "./components/UserProfile";
+import { useBlogApi } from "./hooks"
+import { PrivateRoute } from "./components/PrivateRoute";
+import { useCallback } from "react";
+import { BlogContext } from "./context";
 
 function App() {
+  const blogApi = useBlogApi();
+
+  const handleLogin = useCallback(
+    (username, password) => {
+      blogApi.login(username, password).then(() => {
+        navigate("/");
+      });
+    },
+    [blogApi]
+  );
+  console.log(blogApi);
+
   return (
-    <Router>
-      <Home path="/" userId={1}></Home>
-      <UserProfile path="/users/:userId"></UserProfile>
-      <Post path="/posts/:postId"></Post>
-      <Login path="/login"></Login>
-    </Router>
+    <BlogContext.Provider value={{ blogApi: blogApi }}>
+      <Router>
+      <PrivateRoute path="/">
+          <Home path="/" ></Home>
+          <UserProfile path="/users/:userId"></UserProfile>
+          <Post path="/posts/:postId"></Post>
+        </PrivateRoute>
+        <Login  handleLogin={handleLogin} path="/login"></Login>
+      </Router>
+    </BlogContext.Provider>
     // <div className="App">
     //   {/* <Login></Login>  */}
     //   <Home userId={1}></Home>

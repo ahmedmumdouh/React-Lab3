@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 
-export default function Login() {
-  const [name, updateUsername] = useState("");
-  const [status, updateStatus] = useState(false);
+export default function Login({ handleLogin }) {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Card
@@ -28,8 +28,8 @@ export default function Login() {
                     placeholder="User Name"
                     type="text"
                     name="username"
-                    value={name}
-                    onChange={(e) => updateUsername(e.target.value)}
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
               </div>
@@ -44,6 +44,8 @@ export default function Login() {
                     placeholder="Password"
                     type="password"
                     name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
               </div>
@@ -57,7 +59,7 @@ export default function Login() {
           <button
             type="submit"
             className="btn btn-primary"
-            onClick={(e) => updateStatus(true)}
+            onClick={() => handleLogin(username, password)}
           >
             Login
           </button>

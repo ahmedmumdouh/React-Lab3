@@ -6,7 +6,7 @@ import Header from "./Header";
 export const usersContext = createContext({ users: [] });
 export const postsContext = createContext({ posts: [] });
 
-export function Home({ userId }) {
+export function Home({ children }) {
   const postService = useAllPosts();
   const userService = useAllUsers();
 
@@ -14,11 +14,11 @@ export function Home({ userId }) {
     <h1>Loading...</h1>
   ) : (
     <div>
-      <Header
+      {/* <Header
         username={
           userService.userState.users.filter((user) => user.id === 1)[0].name
         }
-      ></Header>
+      ></Header> */}
       <h1>Featured Posts</h1>
       <Blog
         posts={postService.postState.posts.slice(0, 7)}

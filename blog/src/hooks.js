@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState , useRef } from "react";
+import { BlogApiService } from "./blog-api.service";
+
 
 export function useComments({ postId }) {
   const [comments, setComments] = useState(null);
@@ -63,7 +65,7 @@ export function useAllUsers() {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
       .then((json) => {
-        setUsers({ ...userState, creators: json });
+        setUsers({ ...userState, users: json });
         setLoading(false);
       });
   }, [userState]);
@@ -75,13 +77,55 @@ export function useAllUsers() {
 }
 
 export function useUserPosts({ userId }) {
-  const [userPosts, setUsers] = useState({
-    users: [],
+  const [userPosts, setUserPosts] = useState({
+    posts: [],
   });
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
+      .then((response) => response.json())
+      .then((json) => {
+        setUserPosts({ ...userPosts, posts: json });
+        setLoading(false);
+      });
+  }, [userPosts]);
+
+  return {
+    loading,
+    userPosts,
+  };
 }
 
-export function useUserInfo({ userId }) {}
+export function useUserInfo({ userId }) {
+  const [userInfo, setUserInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+      .then((response) => response.json())
+      .then((json) => {
+        setUserInfo(json);
+        setLoading(false);
+        console.log(userInfo)
+      });
+  }, [userInfo]);
+
+  return {
+    loading,
+    userInfo,
+  };
+
+}
+
+
+
+
+
+export function useBlogApi() {
+  const blogApi = useRef(new BlogApiService());
+  return blogApi.current;
+}
 
 // const [userblogs, setUserBlogs] = useState(null);
 // useEffect(() => {
