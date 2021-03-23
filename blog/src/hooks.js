@@ -1,6 +1,40 @@
 import { useEffect, useState } from "react";
 
-export function usePosts() {
+export function useComments({ postId }) {
+  const [comments, setComments] = useState(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`)
+      .then((Response) => Response.json())
+      .then((json) => {
+        setComments(json);
+        setLoading(false);
+      });
+  }, []);
+  return {
+    loading,
+    comments,
+  };
+}
+
+export function usePost({ postId }) {
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
+      .then((Response) => Response.json())
+      .then((json) => {
+        setPost(json);
+        setLoading(false);
+      });
+  }, []);
+  return {
+    loading,
+    post,
+  };
+}
+
+export function useAllPosts() {
   const [postState, setState] = useState({
     posts: [{ id: 1, userId: 1, title: "test-title", body: "test-body" }],
   });
@@ -20,47 +54,41 @@ export function usePosts() {
   };
 }
 
-export function useCreators() {
-  const [creatorState, setCreator] = useState({
-    creators: [
-      {
-        id: 1,
-        name: "Leanne Graham",
-        username: "Bret",
-        email: "Sincere@april.biz",
-        address: {
-          street: "Kulas Light",
-          suite: "Apt. 556",
-          city: "Gwenborough",
-          zipcode: "92998-3874",
-          geo: {
-            lat: "-37.3159",
-            lng: "81.1496",
-          },
-        },
-        phone: "1-770-736-8031 x56442",
-        website: "hildegard.org",
-        company: {
-          name: "Romaguera-Crona",
-          catchPhrase: "Multi-layered client-server neural-net",
-          bs: "harness real-time e-markets",
-        },
-      },
-    ],
+export function useAllUsers() {
+  const [userState, setUsers] = useState({
+    users: [],
   });
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
       .then((json) => {
-        setCreator({ ...creatorState, creators: json });
+        setUsers({ ...userState, creators: json });
         setLoading(false);
       });
-  }, [creatorState]);
+  }, [userState]);
 
   return {
     loading,
-    creatorState,
+    userState,
   };
-
 }
+
+export function useUserPosts({ userId }) {
+  const [userPosts, setUsers] = useState({
+    users: [],
+  });
+  const [loading, setLoading] = useState(true);
+}
+
+export function useUserInfo({ userId }) {}
+
+// const [userblogs, setUserBlogs] = useState(null);
+// useEffect(() => {
+//   fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
+//     .then((Response) => Response.json())
+//     .then((json) => {
+//       setUserBlogs(json);
+//       // console.log(userblogs);
+//     });
+// }, [userblogs, userId, setUserBlogs]);
