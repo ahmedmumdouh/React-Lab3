@@ -9,6 +9,7 @@ import { PrivateRoute } from "./components/PrivateRoute";
 import { useCallback } from "react";
 import { BlogContext } from "./context";
 import Header from "./components/Header";
+import CreatePost from "./components/CreatePost";
 
 
 function App() {
@@ -37,11 +38,13 @@ function App() {
                 
               </Home>
               <UserProfile path="/users/:userId"></UserProfile>
-              <Post path="/posts/:postId"></Post>     
+              <Post path="/posts/:postId"></Post> 
+              <CreatePost path="/post/new"></CreatePost>    
           </Header>  
      
         </PrivateRoute>
         <Login  handleLogin={handleLogin} path="/login"></Login>
+      
       </Router>
     </BlogContext.Provider>
     // <div className="App">
