@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
+import { useContext } from "react";
+import { BlogContext } from "../context";
 
 export default function Login({ handleLogin }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const context = useContext(BlogContext);
+    context.blogApi.resetCurrentUser() 
+
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Card

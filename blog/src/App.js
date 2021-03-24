@@ -8,6 +8,8 @@ import { useBlogApi } from "./hooks"
 import { PrivateRoute } from "./components/PrivateRoute";
 import { useCallback } from "react";
 import { BlogContext } from "./context";
+import Header from "./components/Header";
+
 
 function App() {
   const blogApi = useBlogApi();
@@ -15,6 +17,7 @@ function App() {
   const handleLogin = useCallback(
     (username, password) => {
       blogApi.login(username, password).then(() => {
+        // createContext({ blogApi: null });
         navigate("/");
       });
     },
@@ -26,9 +29,17 @@ function App() {
     <BlogContext.Provider value={{ blogApi: blogApi }}>
       <Router>
       <PrivateRoute path="/">
-          <Home path="/" ></Home>
-          <UserProfile path="/users/:userId"></UserProfile>
-          <Post path="/posts/:postId"></Post>
+          
+      
+          <Header path="/">
+              <Home path="/" >
+                {{ blogApi: blogApi }}
+                
+              </Home>
+              <UserProfile path="/users/:userId"></UserProfile>
+              <Post path="/posts/:postId"></Post>     
+          </Header>  
+     
         </PrivateRoute>
         <Login  handleLogin={handleLogin} path="/login"></Login>
       </Router>

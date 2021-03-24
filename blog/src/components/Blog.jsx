@@ -6,7 +6,7 @@ export default function Blog({ users, posts }) {
     <div>
       {posts.map((post) => {
         return (
-          <PostCard
+          <PostCard key={post.id}
             post={post}
             user={
               users.filter(

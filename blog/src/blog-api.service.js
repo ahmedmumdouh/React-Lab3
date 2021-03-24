@@ -20,6 +20,10 @@ export class BlogApiService {
     return fetch(API.getUserPosts(postId)).then((res) => res.json());
   }
 
+  resetCurrentUser(){
+    this.isAuthenticated = null
+  }
+
   login(email, password) {
     console.log("inside login ")
     return fetch(`https://jsonplaceholder.typicode.com/users?email=${email}`)
