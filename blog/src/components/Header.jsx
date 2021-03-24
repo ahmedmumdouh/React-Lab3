@@ -20,6 +20,7 @@ export default function Header({ children }) {
         <Navbar.Brand><Link to="/">Home</Link></Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
+        <Nav.Link ><Link to={`/post/new`}>create new post</Link></Nav.Link>
         <Nav.Link ><Link to={`/users/${user.id}`}>{user.name}</Link></Nav.Link>
         <Nav.Link ><Link to="/login">Logout</Link></Nav.Link>
         </Navbar.Collapse>
